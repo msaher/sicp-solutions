@@ -1,0 +1,16 @@
+Suppose two iterations are going to run. The first iteration, is going
+to run `(cons first-element nil)` to produce `'(first-element). The second iteration will run `(cons
+second-element previous-result)`, but the previous-result is
+`'(first-element)`. So the final result will be `(second-element
+first-element)`. 
+
+The suggested fix does not work due to the fact that when one element
+`e` is to be added to a list `L` using `cons`. It has to be in the form
+`(cons e L)`. This is because, `(cons e L)` produces a list as it keeps
+the form of:
+
+``` 
+(cons e (cons l1 (cons l2 .... (cons ln nil))))
+```
+
+While `(cons L e)` does not produce the standared form of a list. 
