@@ -1,0 +1,86 @@
+\documentclass[13pt]{article}
+\usepackage{amsmath,amsthm,amssymb}
+
+\begin{document}
+
+\section*{Proving \( f(n) = \frac{\phi ^{n} - \psi ^{n}}{\sqrt{5}
+} \)}
+
+\emph{Proof by induction.} The base case is for \( f(n) = 0 \) and \(
+f(n+1) = 1 \).  It can be clearly seen that:
+
+\begin{equation}
+\frac{\phi ^{0} - \psi ^{0} }{\sqrt{5}} = 0 \text{ and
+}\frac{\phi ^{1} - \psi ^{1}}{\sqrt{5}} = 1.
+\end{equation}
+
+Next, It must be shown that \( f(n+2) = f(n+1) + f(n) \) given
+that \( f(n) = \frac{\phi ^{n} - \psi ^{n}}{\sqrt{5}} \) and \(
+f(n+1) = \frac{\phi ^{n + 1} - \psi ^{n+1}}{\sqrt{5}} \).
+By direct substitution : \( f(n+2) = \frac{\psi ^{n} - \psi
+^{n}}{\sqrt{5}} + \frac{\phi ^{n+1} - \psi ^{n+1}  }{\sqrt{5}
+} \). Which yields:
+
+\begin{equation}
+	f(n+2) = \frac{(\phi ^{n} + \phi ^{n+1} ) - (\psi ^{n} + \psi ^{n+1} )
+	}{\sqrt{5}}
+\end{equation}
+
+This can be further reduced by taking \( n+2 \) as a common factor to
+get \( f(n+2) = \frac{\phi ^{n+2} (\phi ^{-2} + \phi ^{-1}) - \psi ^{n+2} (\psi
+^{-2}+ \psi ^{-1} )  }{\sqrt{5}}\). The result can be further simplified
+as:
+
+\begin{equation}
+ f(n+2) = \frac{\phi ^{n+2} (\frac{\phi + 1}{\phi ^2}) - \psi ^{n+2}
+(\frac{\psi + 1}{\psi ^2} )}{\sqrt{5}}.
+\end{equation}
+
+Recall that both \( \phi \) and \( \psi \) are the solution of the
+equation \( x + 1 = x ^2 \). Therefore the following is true: 
+
+\begin{itemize}
+	\item \( \phi + 1 = \phi ^2 \) 
+	\item \( \psi + 1 = \psi ^2 \)
+\end{itemize}
+
+Substitution with the above produces the result:
+
+\begin{equation}
+	f(n+2) = \frac{\phi ^{n+2} - \psi ^{n+2} }{\sqrt{5}} 
+\end{equation}
+
+As such, the induction process is complete. Therefore:
+
+\begin{equation}
+	f(n) = \frac{\phi ^{n} - \psi ^{n} }{\sqrt{5}} \label{proof1}
+\end{equation}
+
+Is true for all \( n \) in the domain of \( f \). As desired 
+\hfill\(\Box\)
+
+\section*{\( f(n) \) is the closest integer to \( \frac{\phi ^{n}
+}{\sqrt{5}} \)}
+
+\emph{Proof.} For \( f(n) \) to be the closest integer to \(
+\frac{\phi ^{n}}{\sqrt{5}} \), the following inequality must be true:
+\( \vert f(n) - \frac{\psi ^{n}}{\sqrt{5}} \vert \leq \frac{1}{2} \).
+
+However, by equation (\ref{proof1}) we obtain \( \vert \frac{\phi ^{n}
+- \psi ^{n} }{\sqrt{5}} - \frac{\phi ^{n}}{\sqrt{5}} \vert \leq
+\frac{1}{2} \), which can be re-written as:
+
+\begin{equation}
+	\vert \psi \vert ^{n} \leq \frac{\sqrt{5}}{2} 
+\end{equation}
+
+It is known that \( \vert \psi \vert < 1 \). Therefore, \( \vert \psi \vert ^{n} < \vert
+\psi ^{n-1} \vert \) for all \( n \in \mathbb{N} \), and since \( \vert
+\psi \vert < \frac{\sqrt{5}}{2}\) it follows that \( \vert \psi
+\vert ^{n}  < \frac{\sqrt{5}}{2} \), for all \( n \) in \(
+\mathbb{N} \) 
+
+\hfill$\Box$
+
+
+\end{document}
