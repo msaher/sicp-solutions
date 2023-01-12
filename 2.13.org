@@ -1,0 +1,4 @@
+Assume that x has percentage p and y has percentage q
+then through some math, it can be shown that the new percentage r =
+(p+q)/(1+pq). Assuming that p and q are small enough so that pq is
+negligible we arrive at r = p+q
