@@ -1,0 +1,34 @@
+Let x = (lx,ux) and y = (ly,uy)
+
+# Another attempt
+
+There are three possibilities:
+
+	1. (-,-) call it --
+	2. (-,+) call it -+ or evil
+	3. (+,+) call it ++
+
+	- To find (1) check if *upper* bound is negative or zero.
+	- To find (3) check if *lower* bound is positive or zero.
+	- To find (2) check if both conditions above are false.
+
+Suppose you have x = (lx, ux) and y = (ly, uy), then:
+
+	(notice means it'll be repeated)
+
+	- If x is ++ (check lower bound)
+		* y is ++ ---> (lx * ly, ux * uy)
+		* y is -- ---> (ly * ux, lx * ly) notice
+		* y is -+ ---> (ux * ly, ux * uy)
+	- If x is -- (check upper bound)
+		* y is ++ ---> (lx * uy, ux * ly) notice
+		* y is -- ---> (ux * uy, lx * ly)
+		* y is -+ ---> (lx * uy, lx * ly) notice
+	- If x is -+ (check if both above are false)
+		* y is ++ ---> (lx * uy, ux * uy)
+		* y is -- ---> (ux * ly, lx * ly)
+		* y is -+ ---> (make-interval (if lx*uy < ux*ly then
+		  lx*uy else ux*ly) (if lx*ly > ux*uy then lxly else uxuy))
+
+(* lx uy) (* ux uy) 
+(* ux ly) (* lx ly) 
