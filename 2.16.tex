@@ -1,0 +1,82 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref} % for links
+
+\begin{document}
+
+\section*{Current interval arthmatic}
+
+An identity $I$, such that for all intervals $x$, $x \times I = x$. Does
+exit and has a value of $I = (1 , 1)$. \\ 
+
+\emph{Proof}. For some positive-positive \( (x , y) \). The expression
+\( (a , b) \times (x , y) \) is given by:
+
+\begin{itemize}
+	\item If \( (a , b) \) is positive-positive, then \( (a  , b) \times
+		(x , y) = (a \cdot x , b \cdot y) \) 
+
+	\item If \( (a , b) \) is negative-negative, then \( (a  , b) \times
+		(x , y) = (a \cdot y , b \cdot x) \) 
+
+	\item If \( (a , b) \) is negative-positive, then \( (a  , b) \times
+		(x , y) = (a \cdot y , b \cdot y) \) 
+\end{itemize}
+
+Now, substituting \( (x , y) = (1 , 1) \). We see that all of the
+expressions result in \( (a , b) \). Thus, \( (1 , 1) \) is the
+multiplicative identity of intervals.  \hfill\(\Box\)
+\\
+
+However, there does not exist an inverse interval
+$x^{-1}$, such that $x \times x^{-1} = (1,1)$.
+\\
+
+\emph{Proof}. Consider the multiplication of \( (lx , ux) \) and \( (ly
+, uy). \) 
+
+\begin{itemize}
+	\item If \( x \)  is positive-positive, then
+
+		\begin{itemize}
+			\item If \( y \) is positive-positive \(
+				\rightarrow (lx  \cdot ly , ux  \cdot
+				uy) \).
+			\item If \( y \) is negative-negative \(
+				\rightarrow (ux
+				\cdot ly, lx \cdot uy \).
+
+			\item If \( y \) is negative-positive \(
+				\rightarrow (ux
+				\cdot ly, ux \cdot uy \).
+		\end{itemize}
+
+\end{itemize}
+
+Examining the first case, if \( x \times y = (1 ,1) \implies (lx \cdot
+ly , ux \cdot uy) = (1 , 1) \). This implies that \( y =
+(\frac{1}{lx} , \frac{1}{ux})\). Since \( a \) must be less than \(
+b \) in any given interval of the form \( (a , b) \). The
+positive-positive inverse interval \( y \) does not exist. 
+
+As for the rest of the cases, it can be shown that the inverse intervals
+do not exist due to the fact that they can not produce a
+positive-positive interval such as \( (1 , 1) \). Due to their sign.
+
+Thus, for any given interval \( x \). An inverse does not necessarily 
+exit.
+\hfill \( \Box \)
+
+Since the intervals do not produce a field. It's not possible to treat
+them like real number. 
+
+After some further research. I have encountered the following:
+\href{https://en.wikipedia.org/wiki/Interval_arithmetic#Dependency_problem}{wiki page}
+
+It seems that my approach was more mathematical, and I forgot what it
+means to do asthmatic on intervals. In any case, Using the same symbol
+more than one time, increases the error. See
+\href{https://stackoverflow.com/questions/14130878/sicp-2-16-interval-arithmetic-scheme}{this}
+
+\end{document}
