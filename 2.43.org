@@ -1,0 +1,89 @@
+* The authors approach
+  
+  This is how it's supposed to be
+  
+  #+BEGIN_EXAMPLE
+    (define (queens board-size)
+      (define (queen-cols k)
+	(if (= k 0)
+	    (list empty-board)
+	    (filter
+	      (lambda (positions) (safe? k positions))
+	      (flatmap
+		(lambda (rest-of-queens)
+		  (map (lambda (new-row)
+			 (adjoin-position
+			   new-row k rest-of-queens))
+		       (enumerate-interval 1 board-size))) ; 1
+		(queen-cols (- k 1)))))) ; 2
+      (queen-cols board-size))
+  #+END_EXAMPLE
+
+  It works this way: we start with the solutions for =(queens (- k
+  1))=. Which I like to indicate with =[ < (1 2) (3 4) ....> < (1 2)
+  (3 4) ...> .... ]= (ignore the numbers, what's in between angled
+  bracket is a solution, while the parentehsis is for the
+  positions). Now for each, solution =< (1 2) (3 4) (4 5) >=, do the following.
+
+  #+BEGIN_EXAMPLE
+    Make an interval (1 2 3 ... k).
+    Run map on that interval with the procedure adjoin-position.
+    Remember, that map is running on (1 2 3 ... k) and turning each
+    element in that list into < (1 2) (3 4) ... (element k) >.
+    #+END_EXAMPLE
+
+    So what you end up in the place (1 2 3 ... k)= with is:
+
+    #+BEGIN_EXAMPLE
+      ( < (1 2) (3 4) ... (1 k) >
+	< (1 2) (3 4) ... (2 k) >
+	< (1 2) (3 4) ... (3 k) >
+	< (1 2) (3 4) ... (4 k) >
+	< (1 2) (3 4) ... (5 k) > )
+    #+END_EXAMPLE
+
+    We repeat this process for each solution. Since don't want that
+    pair of =()=, we use =flatmap= instead of =map=.
+
+    Finally, we =filter= using =safe?=.
+* Louis's appraoch
+
+  #+BEGIN_EXAMPLE
+	(define (queens board-size)
+	  (define (queen-cols k)
+	    (if (= k 0)
+		(list empty-board)
+		(filter
+		  (lambda (positions) (safe? k positions))
+		  (flatmap
+		    (lambda (rest-of-queens)
+		      (map (lambda (new-row)
+			     (adjoin-position
+			       new-row k rest-of-queens))
+			   (queen-cols (- k 1)))) ; 2
+		    (enumerate-interval 1 board-size))))) ; 1
+	  (queen-cols board-size))
+	  #+END_EXAMPLE
+
+  (notice the comments which show case the flip).
+
+  what's happening here is that we start with an interval =(1 2 3
+  ... k)=. For each integer we do the following. 
+
+  #+BEGIN_EXAMPLE
+    Find all the solutions, for k-1 in other words (queens (- k 1)).
+    Using adjoin-position, append the position (1 k) to each
+    solution, effectively replacing each integer in (1 2 3 4 ... k) with
+    ( < (1 2) (3 4) ... (int k) > ). Resulting in all solutions.
+  #+END_EXAMPLE
+  
+  What's the problem? Why is method slower?
+  
+  Notice how, in this approach we need to find the =(queens k)= for
+  /each =k= integer/, while in [[*The authors approach][The authors approach]], we do that only
+  once per new column
+
+  [[https://mngu2382.github.io/sicp/chapter2/01-exercise10.html][See solution from someone online for more details]]
+  
+  tl;dr =(n-1)! T=. Also read it, it made me understand it really
+  well.
